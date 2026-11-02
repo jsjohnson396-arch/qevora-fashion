@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QEVORA | Your Style, Your Identity</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#090909;color:#fff;font-family:Arial,sans-serif}
+header{padding:22px 6%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #292929}
+.logo{font-size:27px;letter-spacing:5px;font-weight:bold}
+header span{color:#aaa;font-size:13px}
+.hero{padding:85px 7%;background:linear-gradient(90deg,#000,#222,#080808);min-height:380px;display:flex;flex-direction:column;justify-content:center}
+.hero small{letter-spacing:4px;color:#c6a46b}
+.hero h1{font-size:clamp(40px,8vw,75px);margin:18px 0;max-width:650px}
+.hero p{color:#bbb;line-height:1.7}
+.btn{background:#c6a46b;color:#080808;border:0;padding:14px 25px;margin-top:25px;font-weight:bold;cursor:pointer;width:max-content}
+section{padding:55px 6%}
+.heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+.heading h2{letter-spacing:2px}
+.heading span{color:#aaa;font-size:13px}
+.categories{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:30px}
+.categories button{background:#171717;color:white;border:1px solid #333;padding:11px 20px;cursor:pointer}
+.categories button:hover{background:#c6a46b;color:#000}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.product{background:#151515;padding-bottom:18px}
+.product img{width:100%;height:220px;object-fit:cover;background:#222}
+.product h3{padding:13px 12px 5px;font-size:15px}
+.product p{padding:0 12px;color:#c6a46b}
+.product button{margin:12px;background:#eee;color:#111;border:0;padding:10px 14px;cursor:pointer}
+#count{color:#c6a46b}
+footer{text-align:center;padding:40px 15px;border-top:1px solid #292929;color:#888;line-height:2}
+@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}.product img{height:290px}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">QEVORA</div>
+<span>YOUR BAG: <b id="count">0</b></span>
+</header>
+
+<div class="hero">
+<small>THE NEW FASHION ERA</small>
+<h1>YOUR STYLE.<br>YOUR IDENTITY.</h1>
+<p>Discover your look. Define your identity.<br>Explore the latest fashion collection.</p>
+<button class="btn" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">EXPLORE COLLECTION</button>
+</div>
+
+<section id="shop">
+<div class="heading">
+<h2>NEW COLLECTION</h2>
+<span>QEVORA EDITION 01</span>
+</div>
+<div class="categories">
+<button onclick="filter('All')">ALL</button>
+<button onclick="filter('Men')">MEN</button>
+<button onclick="filter('Women')">WOMEN</button>
+<button onclick="filter('Accessories')">ACCESSORIES</button>
+</div>
+<div class="grid" id="products"></div>
+</section>
+
+<footer>
+<h2 style="letter-spacing:5px;color:white">QEVORA</h2>
+YOUR STYLE. YOUR IDENTITY.<br>
+© 2026 QEVORA. ALL RIGHTS RESERVED.
+</footer>
+
+<script>
+const items=[
+{name:"Classic Black Shirt",price:799,cat:"Men",img:"https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600"},
+{name:"Premium Streetwear",price:999,cat:"Men",img:"https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=600"},
+{name:"Elegant Fashion",price:1199,cat:"Women",img:"https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600"},
+{name:"Casual Outfit",price:899,cat:"Women",img:"https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600"},
+{name:"Classic Sneakers",price:1499,cat:"Accessories",img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600"},
+{name:"Premium Watch",price:1299,cat:"Accessories",img:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600"},
+{name:"Urban Jacket",price:1599,cat:"Men",img:"https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600"},
+{name:"Modern Style",price:1099,cat:"Women",img:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600"}
+];
+let cart=0;
+function show(list){
+document.getElementById('products').innerHTML=list.map(p=>`
+<div class="product">
+<img src="${p.img}" alt="${p.name}">
+<h3>${p.name}</h3>
+<p>₹${p.price}</p>
+<button onclick="add()">ADD TO BAG</button>
+</div>`).join('');
+}
+function filter(cat){show(cat==='All'?items:items.filter(p=>p.cat===cat))}
+function add(){cart++;document.getElementById('count').innerText=cart;alert('Added to your bag!')}
+show(items);
+</script>
+</body>
+</html>
